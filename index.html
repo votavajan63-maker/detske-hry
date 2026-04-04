@@ -1,1 +1,81 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dětské hry zdarma</title>
 
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(#8fd3ff, #dff7ff);
+      text-align: center;
+      padding: 30px;
+    }
+
+    h1 {
+      color: #ff5a5a;
+      font-size: 50px;
+    }
+
+    p {
+      font-size: 22px;
+      color: #333;
+    }
+
+    .box {
+      background: white;
+      max-width: 500px;
+      margin: 40px auto;
+      padding: 30px;
+      border-radius: 25px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+
+    button {
+      background: #ffd93d;
+      border: none;
+      padding: 18px 30px;
+      border-radius: 15px;
+      font-size: 24px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      background: #ffcb05;
+    }
+
+    #score {
+      margin-top: 20px;
+      font-size: 40px;
+      color: #00a651;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🎮 Dětské hry zdarma</h1>
+
+  <div class="box">
+    <p>Klikni na tlačítko a sbírej body!</p>
+
+    <button onclick="addPoint()">Klikni sem 😊</button>
+
+    <div id="score">0</div>
+  </div>
+
+  <script>
+    let score = 0;
+
+    function addPoint() {
+      score++;
+      document.getElementById("score").innerText = score;
+    }
+  </script>
+
+</body>
+</html>
