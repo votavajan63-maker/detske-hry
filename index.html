@@ -67,7 +67,27 @@
 
     <div id="score">0</div>
   </div>
+<div class="box">
+  <p>Jaké je to zvíře?</p>
 
+  <h2 id="animal">🐶</h2>
+
+  <button onclick="answer('kočka')">Kočka</button>
+  <button onclick="answer('pes')">Pes</button>
+  <button onclick="answer('kůň')">Kůň</button>
+
+  <p id="result"></p>
+</div>
+
+<script>
+  function answer(choice) {
+    if (choice === "pes") {
+      document.getElementById("result").innerText = "Správně! To je pes 🐶";
+    } else {
+      document.getElementById("result").innerText = "Zkus to znovu 🙂";
+    }
+  }
+</script>D
   <script>
     let score = 0;
 
