@@ -68,17 +68,25 @@
       margin: 20px 0;
     }
 
-    #result {
+    #result, #colorResult {
       margin-top: 20px;
       font-size: 28px;
       font-weight: bold;
       color: #007700;
+    }
+
+    #colorCircle {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin: 20px auto;
     }
   </style>
 </head>
 <body>
 
   <h1>🎮 Dětské hry zdarma</h1>
+
   <div class="intro">
     Vítej! Zahraj si hry a nauč se něco nového 😊
   </div>
@@ -101,6 +109,18 @@
     <button onclick="answer('Kůň')">Kůň</button>
 
     <div id="result"></div>
+  </div>
+
+  <div class="box">
+    <p>Jaká je to barva?</p>
+
+    <div id="colorCircle"></div>
+
+    <button onclick="checkColor('Červená')">Červená</button>
+    <button onclick="checkColor('Modrá')">Modrá</button>
+    <button onclick="checkColor('Zelená')">Zelená</button>
+
+    <div id="colorResult"></div>
   </div>
 
   <script>
@@ -143,6 +163,40 @@
     }
 
     showAnimal();
+
+    const colors = [
+      { color: "red", correct: "Červená" },
+      { color: "blue", correct: "Modrá" },
+      { color: "green", correct: "Zelená" }
+    ];
+
+    let currentColor = 0;
+
+    function showColor() {
+      document.getElementById("colorCircle").style.background =
+        colors[currentColor].color;
+      document.getElementById("colorResult").innerText = "";
+    }
+
+    function checkColor(choice) {
+      if (choice === colors[currentColor].correct) {
+        document.getElementById("colorResult").innerText = "Správně!";
+
+        currentColor++;
+
+        if (currentColor >= colors.length) {
+          document.getElementById("colorResult").innerText =
+            "🎉 Znáš všechny barvy!";
+        } else {
+          setTimeout(showColor, 1000);
+        }
+      } else {
+        document.getElementById("colorResult").innerText =
+          "Zkus to znovu 🙂";
+      }
+    }
+
+    showColor();
   </script>
 
 </body>
