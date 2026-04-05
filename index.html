@@ -40,6 +40,7 @@
       border-radius: 15px;
       font-size: 24px;
       cursor: pointer;
+      margin: 5px;
       transition: 0.2s;
     }
 
@@ -54,6 +55,18 @@
       color: #00a651;
       font-weight: bold;
     }
+
+    #animal {
+      font-size: 60px;
+      margin: 20px 0;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 28px;
+      font-weight: bold;
+      color: #007700;
+    }
   </style>
 </head>
 <body>
@@ -67,27 +80,19 @@
 
     <div id="score">0</div>
   </div>
-<div class="box">
-  <p>Jaké je to zvíře?</p>
 
-  <h2 id="animal">🐶</h2>
+  <div class="box">
+    <p>Jaké je to zvíře?</p>
 
-  <button onclick="answer('kočka')">Kočka</button>
-  <button onclick="answer('pes')">Pes</button>
-  <button onclick="answer('kůň')">Kůň</button>
+    <div id="animal">🐶</div>
 
-  <p id="result"></p>
-</div>
+    <button onclick="answer('Kočka')">Kočka</button>
+    <button onclick="answer('Pes')">Pes</button>
+    <button onclick="answer('Kůň')">Kůň</button>
 
-<script>
-  function answer(choice) {
-    if (choice === "pes") {
-      document.getElementById("result").innerText = "Správně! To je pes 🐶";
-    } else {
-      document.getElementById("result").innerText = "Zkus to znovu 🙂";
-    }
-  }
-</script>D
+    <div id="result"></div>
+  </div>
+
   <script>
     let score = 0;
 
@@ -95,6 +100,39 @@
       score++;
       document.getElementById("score").innerText = score;
     }
+
+    const animals = [
+      { emoji: "🐶", correct: "Pes" },
+      { emoji: "🐱", correct: "Kočka" },
+      { emoji: "🐴", correct: "Kůň" }
+    ];
+
+    let current = 0;
+
+    function showAnimal() {
+      document.getElementById("animal").innerText = animals[current].emoji;
+      document.getElementById("result").innerText = "";
+    }
+
+    function answer(choice) {
+      if (choice === animals[current].correct) {
+        document.getElementById("result").innerText = "Správně!";
+
+        current++;
+
+        if (current >= animals.length) {
+          document.getElementById("animal").innerText = "🎉";
+          document.getElementById("result").innerText =
+            "Vyhrál jsi! Znáš všechna zvířata.";
+        } else {
+          setTimeout(showAnimal, 1000);
+        }
+      } else {
+        document.getElementById("result").innerText = "Zkus to znovu 🙂";
+      }
+    }
+
+    showAnimal();
   </script>
 
 </body>
