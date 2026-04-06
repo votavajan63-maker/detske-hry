@@ -1,241 +1,248 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dětské hry zdarma</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dětské hry zdarma</title>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      text-align: center;
-      padding: 30px;
-      background: linear-gradient(#87cefa, #c8f0ff);
-      overflow-x: hidden;
-      position: relative;
-    }
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: linear-gradient(#87cefa, #dff5ff);
+    min-height: 100vh;
+    overflow-x: hidden;
+    padding: 20px;
+}
 
-    .cloud {
-      position: absolute;
-      color: white;
-      font-size: 70px;
-      opacity: 0.8;
-    }
+h1 {
+    color: #ff5a5a;
+    font-size: 60px;
+    margin-bottom: 10px;
+}
 
-    .cloud1 { top: 20px; left: 80px; }
-    .cloud2 { top: 120px; right: 120px; }
+.subtitle {
+    font-size: 30px;
+    color: #333;
+    margin-bottom: 30px;
+}
 
-    .butterfly {
-      position: absolute;
-      font-size: 40px;
-      animation: fly 6s infinite ease-in-out;
-    }
+.cloud {
+    position: fixed;
+    font-size: 60px;
+    opacity: 0.8;
+    pointer-events: none;
+}
 
-    .b1 { top: 220px; left: 100px; }
-    .b2 { top: 500px; right: 120px; animation-delay: 2s; }
+.cloud1 { top: 20px; left: 40px; }
+.cloud2 { top: 80px; right: 60px; }
 
-    @keyframes fly {
-      0% { transform: translateY(0px) rotate(0deg); }
-      50% { transform: translateY(-20px) rotate(10deg); }
-      100% { transform: translateY(0px) rotate(0deg); }
-    }
+.butterfly {
+    position: fixed;
+    font-size: 45px;
+    pointer-events: none;
+}
 
-    h1 {
-      color: #ff5a5a;
-      font-size: 55px;
-      margin-bottom: 10px;
-    }
+.b1 { top: 180px; left: 60px; }
+.b2 { top: 420px; right: 90px; }
 
-    .intro {
-      font-size: 24px;
-      color: #333;
-      margin-bottom: 20px;
-    }
+.score-box {
+    background: white;
+    display: inline-block;
+    padding: 12px 30px;
+    border-radius: 20px;
+    font-size: 36px;
+    color: #00a651;
+    font-weight: bold;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    margin-bottom: 35px;
+}
 
-    .scoreBox {
-      background: white;
-      display: inline-block;
-      padding: 15px 30px;
-      border-radius: 20px;
-      font-size: 32px;
-      font-weight: bold;
-      color: #00a651;
-      margin-bottom: 30px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-    }
+.box {
+    background: white;
+    max-width: 700px;
+    margin: 0 auto 30px auto;
+    padding: 35px;
+    border-radius: 30px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
 
-    .box {
-      background: white;
-      max-width: 500px;
-      margin: 40px auto;
-      padding: 30px;
-      border-radius: 30px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-    }
+.age-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
 
-    p {
-      font-size: 24px;
-      color: #333;
-    }
+.age-button {
+    border: none;
+    border-radius: 25px;
+    padding: 25px 35px;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+    min-width: 180px;
+}
 
-    button {
-      background: #ffd93d;
-      border: none;
-      padding: 18px 28px;
-      border-radius: 18px;
-      font-size: 24px;
-      cursor: pointer;
-      margin: 8px;
-      transition: 0.2s;
-    }
+.age-button:hover {
+    transform: scale(1.05);
+}
 
-    button:hover {
-      transform: scale(1.08);
-      background: #ffcb05;
-    }
+.yellow { background: #ffd93d; }
+.green { background: #7ee081; }
+.blue { background: #7ec8ff; }
 
-    #animal {
-      font-size: 70px;
-      margin: 20px 0;
-    }
+button.answer {
+    border: none;
+    border-radius: 20px;
+    padding: 18px 28px;
+    margin: 10px;
+    font-size: 28px;
+    cursor: pointer;
+    background: #ffd93d;
+    transition: 0.2s;
+}
 
-    #colorCircle {
-      width: 110px;
-      height: 110px;
-      border-radius: 50%;
-      margin: 20px auto;
-    }
+button.answer:hover {
+    transform: scale(1.05);
+}
 
-    #result, #colorResult {
-      margin-top: 20px;
-      font-size: 30px;
-      font-weight: bold;
-      color: #007700;
-    }
-  </style>
+.question-image {
+    font-size: 90px;
+    margin: 20px 0;
+}
+
+.hidden {
+    display: none;
+}
+
+.result {
+    margin-top: 25px;
+    font-size: 24px;
+    color: green;
+    font-weight: bold;
+}
+</style>
 </head>
 <body>
 
-  <div class="cloud cloud1">☁️</div>
-  <div class="cloud cloud2">☁️</div>
+<div class="cloud cloud1">☁️</div>
+<div class="cloud cloud2">☁️</div>
+<div class="butterfly b1">🦋</div>
+<div class="butterfly b2">🦋</div>
 
-  <div class="butterfly b1">🦋</div>
-  <div class="butterfly b2">🦋</div>
+<h1>🎮 Dětské hry zdarma</h1>
+<div class="subtitle">Vyber si svůj věk 😊</div>
 
-  <h1>🎮 Dětské hry zdarma</h1>
+<div class="score-box">
+⭐ Body: <span id="score">0</span>
+</div>
 
-  <div class="intro">
-    Vítej! Zahraj si hry a nauč se něco nového 😊
-  </div>
+<div class="box" id="ageSelect">
+    <h2>Kolik ti je let?</h2>
 
-  <div class="scoreBox">
-    ⭐ Body: <span id="score">0</span>
-  </div>
+    <div class="age-buttons">
+        <button class="age-button yellow" onclick="selectAge('small')">
+            🧸<br>2–3 roky
+        </button>
 
-  <div class="box" id="animalGame">
+        <button class="age-button green" onclick="selectAge('middle')">
+            🐻<br>4–5 let
+        </button>
+
+        <button class="age-button blue" onclick="selectAge('big')">
+            🚀<br>6–7 let
+        </button>
+    </div>
+</div>
+
+<div class="box hidden" id="smallGames">
+    <h2>🧸 Hry pro 2–3 roky</h2>
     <p>Jaké je to zvíře?</p>
 
-    <div id="animal">🐶</div>
+    <div class="question-image">🐶</div>
 
-    <button onclick="answerAnimal('Kočka')">Kočka</button>
-    <button onclick="answerAnimal('Pes')">Pes</button>
-    <button onclick="answerAnimal('Kůň')">Kůň</button>
+    <button class="answer" onclick="correctSmall()">Pes</button>
+    <button class="answer" onclick="wrong()">Kočka</button>
+    <button class="answer" onclick="wrong()">Kůň</button>
 
-    <div id="result"></div>
-  </div>
+    <div id="smallResult" class="result"></div>
+</div>
 
-  <div class="box" id="colorGame" style="display: none;">
+<div class="box hidden" id="middleGames">
+    <h2>🐻 Hry pro 4–5 let</h2>
     <p>Jaká je to barva?</p>
 
-    <div id="colorCircle"></div>
+    <div class="question-image" style="color:green;">🟢</div>
 
-    <button onclick="answerColor('Červená')">Červená</button>
-    <button onclick="answerColor('Modrá')">Modrá</button>
-    <button onclick="answerColor('Zelená')">Zelená</button>
+    <button class="answer" onclick="wrong()">Modrá</button>
+    <button class="answer" onclick="correctMiddle()">Zelená</button>
+    <button class="answer" onclick="wrong()">Červená</button>
 
-    <div id="colorResult"></div>
-  </div>
+    <div id="middleResult" class="result"></div>
+</div>
 
-  <script>
-    let score = 0;
+<div class="box hidden" id="bigGames">
+    <h2>🚀 Hry pro 6–7 let</h2>
+    <p>Kolik je 2 + 3 ?</p>
 
-    function addScore() {
-      score++;
-      document.getElementById("score").innerText = score;
+    <div class="question-image">➕</div>
+
+    <button class="answer" onclick="wrong()">4</button>
+    <button class="answer" onclick="correctBig()">5</button>
+    <button class="answer" onclick="wrong()">6</button>
+
+    <div id="bigResult" class="result"></div>
+</div>
+
+<script>
+let score = 0;
+
+function addPoint() {
+    score++;
+    document.getElementById("score").innerText = score;
+}
+
+function selectAge(age) {
+    document.getElementById("smallGames").classList.add("hidden");
+    document.getElementById("middleGames").classList.add("hidden");
+    document.getElementById("bigGames").classList.add("hidden");
+
+    if (age === "small") {
+        document.getElementById("smallGames").classList.remove("hidden");
     }
 
-    const animals = [
-      { emoji: "🐶", correct: "Pes" },
-      { emoji: "🐱", correct: "Kočka" },
-      { emoji: "🐴", correct: "Kůň" }
-    ];
-
-    let currentAnimal = 0;
-
-    function showAnimal() {
-      document.getElementById("animal").innerText = animals[currentAnimal].emoji;
-      document.getElementById("result").innerText = "";
+    if (age === "middle") {
+        document.getElementById("middleGames").classList.remove("hidden");
     }
 
-    function answerAnimal(choice) {
-      if (choice === animals[currentAnimal].correct) {
-        addScore();
-
-        currentAnimal++;
-
-        if (currentAnimal >= animals.length) {
-          document.getElementById("animal").innerText = "🎉";
-          document.getElementById("result").innerText =
-            "Super! Teď se odemkly barvy.";
-
-          document.getElementById("colorGame").style.display = "block";
-        } else {
-          document.getElementById("result").innerText = "Správně!";
-          setTimeout(showAnimal, 1000);
-        }
-      } else {
-        document.getElementById("result").innerText = "Zkus to znovu 🙂";
-      }
+    if (age === "big") {
+        document.getElementById("bigGames").classList.remove("hidden");
     }
+}
 
-    showAnimal();
+function correctSmall() {
+    addPoint();
+    document.getElementById("smallResult").innerText = "🎉 Správně! To je pes.";
+}
 
-    const colors = [
-      { color: "red", correct: "Červená" },
-      { color: "blue", correct: "Modrá" },
-      { color: "green", correct: "Zelená" }
-    ];
+function correctMiddle() {
+    addPoint();
+    document.getElementById("middleResult").innerText = "🎉 Správně! To je zelená.";
+}
 
-    let currentColor = 0;
+function correctBig() {
+    addPoint();
+    document.getElementById("bigResult").innerText = "🎉 Správně! 2 + 3 = 5.";
+}
 
-    function showColor() {
-      document.getElementById("colorCircle").style.background =
-        colors[currentColor].color;
-      document.getElementById("colorResult").innerText = "";
-    }
-
-    function answerColor(choice) {
-      if (choice === colors[currentColor].correct) {
-        addScore();
-
-        currentColor++;
-
-        if (currentColor >= colors.length) {
-          document.getElementById("colorResult").innerText =
-            "🎉 Hotovo! Dnes máš " + score + " bodů!";
-        } else {
-          document.getElementById("colorResult").innerText = "Správně!";
-          setTimeout(showColor, 1000);
-        }
-      } else {
-        document.getElementById("colorResult").innerText =
-          "Zkus to znovu 🙂";
-      }
-    }
-
-    showColor();
-  </script>
+function wrong() {
+    alert("Zkus to znovu 😊");
+}
+</script>
 
 </body>
 </html>
