@@ -23,15 +23,8 @@
       opacity: 0.8;
     }
 
-    .cloud1 {
-      top: 20px;
-      left: 80px;
-    }
-
-    .cloud2 {
-      top: 120px;
-      right: 120px;
-    }
+    .cloud1 { top: 20px; left: 80px; }
+    .cloud2 { top: 120px; right: 120px; }
 
     .butterfly {
       position: absolute;
@@ -39,16 +32,8 @@
       animation: fly 6s infinite ease-in-out;
     }
 
-    .b1 {
-      top: 220px;
-      left: 100px;
-    }
-
-    .b2 {
-      top: 500px;
-      right: 120px;
-      animation-delay: 2s;
-    }
+    .b1 { top: 220px; left: 100px; }
+    .b2 { top: 500px; right: 120px; animation-delay: 2s; }
 
     @keyframes fly {
       0% { transform: translateY(0px) rotate(0deg); }
@@ -60,16 +45,24 @@
       color: #ff5a5a;
       font-size: 55px;
       margin-bottom: 10px;
-      position: relative;
-      z-index: 2;
     }
 
     .intro {
       font-size: 24px;
       color: #333;
-      margin-bottom: 40px;
-      position: relative;
-      z-index: 2;
+      margin-bottom: 20px;
+    }
+
+    .scoreBox {
+      background: white;
+      display: inline-block;
+      padding: 15px 30px;
+      border-radius: 20px;
+      font-size: 32px;
+      font-weight: bold;
+      color: #00a651;
+      margin-bottom: 30px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
     }
 
     .box {
@@ -79,8 +72,6 @@
       padding: 30px;
       border-radius: 30px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-      position: relative;
-      z-index: 2;
     }
 
     p {
@@ -102,13 +93,6 @@
     button:hover {
       transform: scale(1.08);
       background: #ffcb05;
-    }
-
-    #score {
-      margin-top: 20px;
-      font-size: 42px;
-      color: #00a651;
-      font-weight: bold;
     }
 
     #animal {
@@ -145,12 +129,8 @@
     Vítej! Zahraj si hry a nauč se něco nového 😊
   </div>
 
-  <div class="box">
-    <p>Klikni na tlačítko a sbírej body!</p>
-
-    <button onclick="addPoint()">Klikni sem 😊</button>
-
-    <div id="score">0</div>
+  <div class="scoreBox">
+    ⭐ Body: <span id="score">0</span>
   </div>
 
   <div class="box" id="animalGame">
@@ -158,9 +138,9 @@
 
     <div id="animal">🐶</div>
 
-    <button onclick="answer('Kočka')">Kočka</button>
-    <button onclick="answer('Pes')">Pes</button>
-    <button onclick="answer('Kůň')">Kůň</button>
+    <button onclick="answerAnimal('Kočka')">Kočka</button>
+    <button onclick="answerAnimal('Pes')">Pes</button>
+    <button onclick="answerAnimal('Kůň')">Kůň</button>
 
     <div id="result"></div>
   </div>
@@ -170,9 +150,9 @@
 
     <div id="colorCircle"></div>
 
-    <button onclick="checkColor('Červená')">Červená</button>
-    <button onclick="checkColor('Modrá')">Modrá</button>
-    <button onclick="checkColor('Zelená')">Zelená</button>
+    <button onclick="answerColor('Červená')">Červená</button>
+    <button onclick="answerColor('Modrá')">Modrá</button>
+    <button onclick="answerColor('Zelená')">Zelená</button>
 
     <div id="colorResult"></div>
   </div>
@@ -180,7 +160,7 @@
   <script>
     let score = 0;
 
-    function addPoint() {
+    function addScore() {
       score++;
       document.getElementById("score").innerText = score;
     }
@@ -194,19 +174,20 @@
     let currentAnimal = 0;
 
     function showAnimal() {
-      document.getElementById("animal").innerText =
-        animals[currentAnimal].emoji;
+      document.getElementById("animal").innerText = animals[currentAnimal].emoji;
       document.getElementById("result").innerText = "";
     }
 
-    function answer(choice) {
+    function answerAnimal(choice) {
       if (choice === animals[currentAnimal].correct) {
+        addScore();
+
         currentAnimal++;
 
         if (currentAnimal >= animals.length) {
           document.getElementById("animal").innerText = "🎉";
           document.getElementById("result").innerText =
-            "Vyhrál jsi! Znáš všechna zvířata.";
+            "Super! Teď se odemkly barvy.";
 
           document.getElementById("colorGame").style.display = "block";
         } else {
@@ -234,13 +215,15 @@
       document.getElementById("colorResult").innerText = "";
     }
 
-    function checkColor(choice) {
+    function answerColor(choice) {
       if (choice === colors[currentColor].correct) {
+        addScore();
+
         currentColor++;
 
         if (currentColor >= colors.length) {
           document.getElementById("colorResult").innerText =
-            "🎉 Super! Znáš všechny barvy!";
+            "🎉 Hotovo! Dnes máš " + score + " bodů!";
         } else {
           document.getElementById("colorResult").innerText = "Správně!";
           setTimeout(showColor, 1000);
